@@ -6,4 +6,5 @@ using { riskmanagement as rm } from '../db/schema';
      annotate Risks with @odata.draft.enabled;
  entity Mitigations as projection on rm.Mitigations;
      annotate Mitigations with @odata.draft.enabled;
+@readonly entity BusinessPartners as projection on rm.BusinessPartners;
  }
