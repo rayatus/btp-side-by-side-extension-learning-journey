@@ -46,8 +46,8 @@ annotate rm.Risks with {
   
   bp @(Common: {
     //show BP fullName instead of BP ID
-    Text           : bp.FirstName,
-    TextArrangement: #TextOnly,
+    Text           : bp.FullName,
+    TextArrangement: #TextFirst,
     //add F4 against BP
     ValueList      : {
       Label         : 'Business Partners',
@@ -65,4 +65,16 @@ annotate rm.Risks with {
       ]
     }
   });
+}
+
+// Annotate Miti elements
+annotate rm.BusinessPartners with {
+  ID    @(
+    UI.Hidden,
+    Common: {Text: FullName}
+  );
+  BusinessPartner @title : 'Business Partner';
+  FirstName @title: 'First Name';
+  LastName  @title: 'Last Name';
+  FullName @title : 'Full Name'
 }
