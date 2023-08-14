@@ -24,7 +24,10 @@
   },
   "scripts": {
     "start": "cds run",
-    "watch-risks": "cds watch --open risks/webapp/index.html?sap-ui-xx-viewCache=false"
+    "watch-risks": "cds watch --open risks/webapp/index.html?sap-ui-xx-viewCache=false",
+    "freeze": "npm update --package-lock-only",
+    "build:mta": "cds build --production && mbt build -p=cf",
+    "deploy:cf": "npm run freeze && npm run build:mta && cf deploy mta_archives/${npm_package_name}_${npm_package_version}.mtar -f"
   },
   "eslintConfig": {
     "extends": "eslint:recommended",
