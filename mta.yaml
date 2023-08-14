@@ -1,0 +1,62 @@
+_schema-version: '3.1'
+ID: jsr-risk-management
+version: 1.0.0
+description: "JSR internal project for Building side-by-side extensions on SAP
+  BTP eLearning journey"
+parameters:
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npx cds build --production
+modules:
+  - name: jsr-risk-management-srv
+    type: nodejs
+    path: gen/srv
+    parameters:
+      buildpack: nodejs_buildpack
+    build-parameters:
+      builder: npm
+    provides:
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
+        properties:
+          srv-url: ${default-url}
+    requires:
+      - name: jsr-risk-management-auth
+      - name: jsr-risk-management-db
+      - name: jsr-risk-management-destination
+
+  - name: jsr-risk-management-db-deployer
+    type: hdb
+    path: gen/db
+    parameters:
+      buildpack: nodejs_buildpack
+    requires:
+      - name: jsr-risk-management-db
+
+resources:
+  - name: jsr-risk-management-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: jsr-risk-management-${org}-${space}
+        tenant-mode: dedicated
+        oauth2-configuration: # <-- add this
+          redirect-uris:
+          # example: - https://risk-management-approuter.cfapps.eu10-004.hana.ondemand.com/login/callback
+          - https:///login/callback
+          
+  - name: jsr-risk-management-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+  - name: jsr-risk-management-destination
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: destination
+      service-plan: lite
