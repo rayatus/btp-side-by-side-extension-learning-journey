@@ -59,7 +59,7 @@ resources:
       service-plan: application
       path: ./xs-security.json
       config:
-        xsappname: jsr-risk-management-${org}-${space}
+        xsappname: jsr-risk-management-${space}
         tenant-mode: dedicated
         oauth2-configuration:
           # <-- add this
