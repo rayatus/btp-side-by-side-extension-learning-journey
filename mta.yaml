@@ -65,7 +65,7 @@ resources:
           # <-- add this
           redirect-uris:
             # example: - https://risk-management-approuter.cfapps.eu10-004.hana.ondemand.com/login/callback
-            - https:///login/callback
+            - https://trifork-smart-enterprise-dev-jsr-risk-management.cfapps.eu20.hana.ondemand.com/login/callback
 
   - name: jsr-risk-management-db
     type: com.sap.xs.hdi-container
