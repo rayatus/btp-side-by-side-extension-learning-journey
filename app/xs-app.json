@@ -14,7 +14,7 @@
     },
     {
       "source": "^/service/(.*)$",
-      "target": "$1",
+      "target": "/service/$1",
       "destination": "srv-api",
       "csrfProtection": true
     }
