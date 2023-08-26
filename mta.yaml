@@ -61,6 +61,15 @@ resources:
       config:
         xsappname: jsr-risk-management-${space}
         tenant-mode: dedicated
+        role-collections:
+        - name: 'RiskManager-${space}'
+          description: Manage Risks
+          role-template-references:
+          - $XSAPPNAME.RiskManager
+        - name: 'RiskViewer-${space}'
+          description: View Risks
+          role-template-references:
+          - $XSAPPNAME.RiskViewer
         oauth2-configuration:
           # <-- add this
           redirect-uris:
