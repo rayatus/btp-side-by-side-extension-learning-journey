@@ -74,7 +74,8 @@ resources:
           # <-- add this
           redirect-uris:
             # example: - https://risk-management-approuter.cfapps.eu10-004.hana.ondemand.com/login/callback
-            - https://trifork-smart-enterprise-dev-jsr-risk-management.cfapps.eu20.hana.ondemand.com/login/callback
+            - https://trifork-smart-enterprise-dev-jsr-risk-management.cfapps.eu20.hana.ondemand.com/login/callback #when running on Trifork's BTP account
+            - https://3e06f81atrial-dev-jsr-risk-management.cfapps.us10-001.hana.ondemand.com/login/callback #when running on my SAP BTP Trial account
 
   - name: jsr-risk-management-db
     type: com.sap.xs.hdi-container
